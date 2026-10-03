@@ -1,0 +1,327 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>こころの見え方ノート</title>
+<style>
+:root{--bg:#f7f5f0;--card:#fff;--ink:#343434;--muted:#777;--accent:#7c9f91;--accent2:#dce9e3;--line:#ddd8cf;--soft:#faf9f6}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Noto Sans JP","Yu Gothic",sans-serif;line-height:1.6}.wrap{max-width:1100px;margin:auto;padding:24px 18px 50px}h1,h2,h3{line-height:1.35}h1{font-size:28px;margin:0 0 8px}.lead{color:var(--muted);margin:0 0 18px}.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:20px;margin-bottom:18px;box-shadow:0 3px 12px #00000008}.note{background:#f0f6f3;border-radius:12px;padding:12px 14px;font-size:14px}.stepbar{display:flex;gap:7px;flex-wrap:wrap;margin:0 0 18px}.step{padding:7px 11px;border-radius:999px;background:#ebe8e2;color:#777;font-size:13px}.step.active{background:var(--accent2);color:#3e6256;font-weight:700}.step.done{background:#e7eee9;color:#57766a}.screen{display:none}.screen.active{display:block}.textarea{width:100%;min-height:150px;resize:vertical;border:1px solid var(--line);border-radius:14px;padding:14px;font:inherit;background:#fff}.counter{font-size:12px;color:var(--muted);text-align:right;margin-top:4px}.examples{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}.example{border:1px solid var(--line);background:var(--soft);border-radius:999px;padding:7px 11px;cursor:pointer}.example:hover{background:#f4f8f6}.buttons{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}button.primary,button.secondary{border:0;border-radius:12px;padding:11px 16px;cursor:pointer;font-weight:700}button.primary{background:var(--accent);color:white}button.secondary{background:#eee9e1;color:#444}.hint{font-size:13px;color:var(--muted)}.row{display:flex;gap:20px;align-items:stretch}.controls{width:350px;flex:none}.control{margin:0 0 18px}.labelline{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;font-weight:600}.value{font-size:13px;color:var(--muted);font-weight:400}.range{width:100%;accent-color:var(--accent);cursor:pointer}.direction-grid{width:300px;margin:16px auto 4px;display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(3,54px);gap:8px}.dir{border:1px solid var(--line);background:#fff;border-radius:12px;color:#444;font-size:14px;cursor:pointer;transition:.15s}.dir:hover{background:#f4f8f6}.dir.active{background:var(--accent2);border-color:var(--accent);font-weight:700}.dir:nth-child(1){grid-column:2;grid-row:1}.dir:nth-child(2){grid-column:3;grid-row:1}.dir:nth-child(3){grid-column:3;grid-row:2}.dir:nth-child(4){grid-column:3;grid-row:3}.dir:nth-child(5){grid-column:2;grid-row:3}.dir:nth-child(6){grid-column:1;grid-row:3}.dir:nth-child(7){grid-column:1;grid-row:2}.dir:nth-child(8){grid-column:1;grid-row:1}.visual{position:relative;flex:1;min-height:470px;border:1px solid var(--line);border-radius:16px;background:linear-gradient(#f5f8f6,#edf3ef);overflow:hidden}.self{position:absolute;left:50%;top:50%;width:52px;height:78px;transform:translate(-50%,-50%);z-index:3;text-align:center}.self .head{width:25px;height:25px;border-radius:50%;background:#555;margin:auto}.self .body{width:34px;height:47px;border-radius:16px 16px 9px 9px;background:#78988a;margin:2px auto 0}.self .label{position:absolute;top:73px;left:50%;transform:translateX(-50%);font-size:12px;white-space:nowrap;background:#fffddf;padding:2px 7px;border-radius:9px}.scene{position:absolute;left:50%;top:50%;width:120px;height:85px;transform:translate(-50%,-50%);transform-origin:center;transition:left .12s,top .12s,width .12s,height .12s;z-index:2}.scene svg{width:100%;height:100%;display:block;filter:grayscale(0) brightness(1)}.scene .sun{fill:#f2c86b}.scene .mountain{fill:#9db6aa}.scene .mountain2{fill:#b7c9bf}.scene .ground{fill:#91aa88}.scene .house{fill:#d9b38c}.scene .window{fill:#8bb6c5;stroke:#6c8d98;stroke-width:3}.motion{position:absolute;inset:0;border:3px dashed transparent;border-radius:20px;pointer-events:none}.motion.spin{animation:spin 1.2s linear infinite;border-color:#ffffff99}@keyframes spin{to{transform:rotate(360deg)}}.caption{position:absolute;left:50%;bottom:-28px;transform:translateX(-50%);background:#ffffffdd;border-radius:9px;padding:3px 8px;font-size:12px;white-space:nowrap}.choice-row{display:flex;flex-wrap:wrap;gap:8px}.choice{border:1px solid var(--line);background:#fff;border-radius:999px;padding:8px 12px;cursor:pointer}.choice.selected{background:var(--accent2);border-color:var(--accent);font-weight:700}.summary{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.summary div{background:var(--soft);border:1px solid var(--line);border-radius:12px;padding:10px 12px}.history-item{padding:10px 0;border-bottom:1px solid #eee;font-size:14px}.home-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:22px}.home-card{border:1px solid var(--line);background:#fff;border-radius:16px;padding:20px 16px;cursor:pointer;color:var(--ink);text-align:left;display:flex;flex-direction:column;gap:6px;transition:.15s}.home-card:hover{background:#f4f8f6;border-color:var(--accent)}.home-icon{font-size:28px}.home-card strong{font-size:16px}.home-card small{color:var(--muted);font-size:13px;line-height:1.5}.record-card{background:var(--soft);border:1px solid var(--line);border-radius:12px;padding:12px;margin-bottom:10px}.record-meta{color:var(--muted);font-size:12px}.record-actions{margin-top:10px;text-align:right}.delete-record{border:1px solid #e3b5b5;background:#fff7f7;color:#a34a4a;border-radius:8px;padding:6px 10px;cursor:pointer;font-size:12px}@media(max-width:800px){.home-grid{grid-template-columns:1fr}}.empty{color:var(--muted)}.home-link{position:fixed;top:14px;left:14px;z-index:1000;border:1px solid var(--line);background:#fffffff2;color:#3e6256;border-radius:999px;padding:8px 13px;font-weight:700;cursor:pointer;box-shadow:0 2px 10px #00000012;display:none}.home-link:hover{background:#f0f6f3}.change-header{margin-bottom:8px}.change-header h1{margin:0}.change-home-flow{white-space:nowrap}@media(max-width:800px){.row{flex-direction:column}.controls{width:auto}.visual{min-height:430px}.scene{width:130px;height:92px}.summary{grid-template-columns:1fr}}@media(min-width:801px){#checkScreen .card.row{display:grid;grid-template-columns:minmax(300px,350px) minmax(0,1fr);gap:20px}#checkScreen .controls{width:auto;min-width:0}#checkScreen .visual{min-width:0;width:100%}}@media(max-width:800px){#checkScreen .card.row{display:flex;flex-direction:column}#checkScreen .controls{width:auto;min-width:0}#checkScreen .visual{width:100%;min-width:0}}@media(max-width:600px){.direction-grid{width:100%;max-width:300px}}
+</style>
+</head>
+<body>
+<button class="home-link" id="globalHome" type="button">🏠 トップへ</button>
+<div class="wrap">
+<section class="screen active" id="homeScreen">
+<div class="card" style="text-align:center;padding:30px 20px">
+<h1>🌱 こころの見え方ノート</h1>
+<p class="lead">頭の中の場面の「見え方・感じ方」を少し変えて、自分に合う変え方を探してみましょう。</p>
+<div class="home-grid">
+<button class="home-card" id="openCheck"><span class="home-icon">🔎</span><strong>自分の感じ方を知る</strong><small>まずは軽い場面で、どんな変化を感じやすいか試してみる</small></button>
+<button class="home-card" id="openChange"><span class="home-icon">🔄</span><strong>こころの景色を変えてみる</strong><small>実際の悩みを使って、場面の特徴を変えてみる</small></button>
+<button class="home-card" id="openRecords"><span class="home-icon">📚</span><strong>これまでの記録</strong><small>これまでに試した内容や、変化を感じた項目を振り返る</small></button>
+</div>
+<div class="note" style="margin-top:18px;text-align:left">💡 どちらから始めても大丈夫です。強い記憶を無理に扱う必要はありません。途中で休んだり、やめたりできます。</div>
+</div>
+</section>
+
+<section class="screen" id="checkScreen">
+<div class="card">
+<h2>🔎 自分の感じ方を知る</h2>
+<p>まずは重くない場面をひとつ思い浮かべて、場面の特徴を少し動かしてみましょう。</p>
+<div class="note">例えば「公園」「自分の部屋」「カフェ」「好きな景色」など。映像がはっきり浮かばなくても大丈夫です。</div>
+</div>
+<div class="card row">
+<div class="controls">
+<h3>場面の位置</h3>
+<div class="direction-grid" id="checkDirections">
+<button class="dir" data-dir="front">前</button><button class="dir" data-dir="frontRight">右斜め前</button><button class="dir" data-dir="right">右</button>
+<button class="dir" data-dir="backRight">右斜め後ろ</button><button class="dir" data-dir="back">後ろ</button><button class="dir" data-dir="backLeft">左斜め後ろ</button>
+<button class="dir" data-dir="left">左</button><button class="dir" data-dir="frontLeft">左斜め前</button>
+</div>
+<div id="checkControls"></div>
+</div>
+<div class="visual" id="checkVisual">
+<div class="self"><div class="head"></div><div class="body"></div><div class="label">自分</div></div>
+<div class="scene" id="checkScene"><svg viewBox="0 0 240 170"><rect x="4" y="4" width="232" height="162" rx="18" fill="#eaf3ee" stroke="#b8cfc4" stroke-width="3"/><circle cx="190" cy="42" r="19" class="sun"/><path d="M10 112 L62 62 L105 112 Z" class="mountain"/><path d="M76 112 L128 70 L175 112 Z" class="mountain2"/><path d="M0 112 Q60 96 120 112 T240 110 V166 H0Z" class="ground"/><path d="M118 106 V72 L158 48 L198 72 V106Z" class="house"/><path d="M112 73 L158 43 L204 73" fill="none" stroke="#7b6a60" stroke-width="8" stroke-linecap="round"/><rect x="143" y="82" width="30" height="24" rx="2" class="window"/><circle cx="91" cy="121" r="9" fill="#7f9f91"/><path d="M91 130 V151 M91 137 L78 146 M91 137 L104 146" stroke="#657f74" stroke-width="5" stroke-linecap="round"/><g id="checkSound" opacity="0"><path d="M27 82 H40 L52 70 V94 L40 82 H27Z" fill="#667"/><path d="M58 70 Q72 82 58 94" fill="none" stroke="#667" stroke-width="4"/><path d="M67 62 Q88 82 67 102" fill="none" stroke="#667" stroke-width="4"/></g></svg><div class="motion" id="checkMotion"></div><div class="caption">場面</div></div>
+</div>
+<div class="card">
+<h3>一番変化を感じたものは？</h3><p class="hint">数字の変化ではなく、「自分が少し変わった」と感じたものを選んでください。最大3つまで。</p>
+<div class="choice-row" id="checkChoices"></div>
+<div class="buttons"><button class="secondary" id="backHomeFromCheck">トップへ戻る</button><button class="primary" id="saveCheck">チェック結果を記録する</button></div>
+</div>
+</section>
+
+<section class="screen" id="recordsScreen">
+<div class="card"><h2>📚 これまでの記録</h2><p>これまでに保存した「自分の感じ方を知る」と「こころの景色を変えてみる」の記録をまとめて確認できます。</p></div>
+<div class="card"><h3>🔎 感じ方を知る記録</h3><div id="checkHistory"></div></div>
+<div class="card"><h3>🌱 景色を変えてみた記録</h3><div id="changeHistory"></div></div>
+<div class="card"><h3>🌿 変化を感じた項目</h3><div id="preferenceHistory"></div></div>
+<div class="buttons"><button class="secondary" id="backHomeFromRecords">トップへ戻る</button></div>
+</section>
+
+<section class="screen" id="changeAppScreen">
+<div class="change-header"><h1>🌱 こころの景色を変えてみる</h1></div>
+<p class="lead">気になっている出来事をひとつ思い浮かべ、その場面の「見え方・感じ方」を少し変えてみましょう。</p>
+<div class="stepbar" id="stepbar">
+<span class="step active">1 悩みを書く</span><span class="step">2 場面をイメージ</span><span class="step">3 今の状態を設定</span><span class="step">4 変化させる</span><span class="step">5 結果を記録</span>
+</div>
+
+<section class="screen" id="screen1">
+<div class="card">
+<h2>1．今、気になっていることは？</h2>
+<p>最近の出来事や、頭から離れないことをひとつ書いてみましょう。うまく文章にしなくても大丈夫です。</p>
+<textarea id="concern" class="textarea" maxlength="500" placeholder="例：仕事で注意されたことが、何度も頭に浮かんでくる"></textarea>
+<div class="counter"><span id="concernCount">0</span> / 500文字</div>
+<div class="examples">
+<button class="example" data-example="仕事で注意されたことが頭から離れない">仕事で注意された</button>
+<button class="example" data-example="誰かに言われた言葉が気になっている">言われた言葉が気になる</button>
+<button class="example" data-example="自分の失敗を何度も思い出してしまう">失敗を思い出す</button>
+<button class="example" data-example="これからのことを考えると不安になる">これからが不安</button>
+</div>
+<div class="note" style="margin-top:14px">強い記憶を無理に扱う必要はありません。今日は軽い出来事や、今の自分が扱えそうなものから始めてください。</div>
+<div class="buttons"><button class="primary" id="to2">次へ：場面をイメージする</button><button class="secondary change-home-flow" type="button">🏠 トップへ</button></div>
+</div>
+</section>
+
+<section class="screen" id="screen2">
+<div class="card">
+<h2>2．その場面をイメージしてみましょう</h2>
+<p><strong>今書いた出来事を、頭の中でひとつの場面として思い浮かべてみてください。</strong></p>
+<div class="note">
+「そのとき、何が見えている？」「自分はどこにいる？」「声や音はある？」など、分かる範囲で大丈夫です。映像がはっきり浮かばなくても、言葉・音・雰囲気・体の感じでもOKです。
+</div>
+<p style="margin-top:18px">思い浮かんだら、その場面をそのままにして、次へ進みます。</p>
+<div class="buttons"><button class="secondary" id="back1">戻る</button><button class="primary" id="to3">イメージできた → 次へ</button><button class="secondary change-home-flow" type="button">🏠 トップへ</button></div>
+</div>
+</section>
+
+<section class="screen" id="screen3">
+<div class="card">
+<h2>3．今のイメージを教えてください</h2>
+<p>思い浮かべた場面が「今、どんなふうに見えて・聞こえているか」を近いものに合わせます。</p>
+<div class="note">正確に測る必要はありません。「たぶんこのくらい」という感覚で大丈夫です。ここで設定した状態が、今回の<strong>スタート地点</strong>になります。</div>
+</div>
+<div class="card row">
+<div class="controls">
+<h3>場面の位置</h3>
+<div class="direction-grid" id="directions">
+<button class="dir" data-dir="front">前</button><button class="dir" data-dir="frontRight">右斜め前</button><button class="dir" data-dir="right">右</button>
+<button class="dir" data-dir="backRight">右斜め後ろ</button><button class="dir" data-dir="back">後ろ</button><button class="dir" data-dir="backLeft">左斜め後ろ</button>
+<button class="dir" data-dir="left">左</button><button class="dir" data-dir="frontLeft">左斜め前</button>
+</div>
+<h3 style="margin-top:24px">場面の特徴</h3>
+<div class="control"><div class="labelline"><span>距離</span><span class="value" id="distanceVal"></span></div><input class="range" id="distance" type="range" min="0" max="100" value="50"></div>
+<div class="control"><div class="labelline"><span>大きさ</span><span class="value" id="sizeVal"></span></div><input class="range" id="size" type="range" min="0" max="100" value="25"></div>
+<div class="control"><div class="labelline"><span>明るさ</span><span class="value" id="brightnessVal"></span></div><input class="range" id="brightness" type="range" min="0" max="100" value="100"></div>
+<div class="control"><div class="labelline"><span>音量</span><span class="value" id="volumeVal"></span></div><input class="range" id="volume" type="range" min="0" max="100" value="35"></div>
+<div class="control"><div class="labelline"><span>動き</span><span class="value" id="motionVal"></span></div><input class="range" id="motion" type="range" min="0" max="100" value="0"></div>
+<p class="hint">※音量は実際に音を鳴らさず、場面の中の「音が大きい感じ」をイラストで表します。</p>
+</div>
+<div class="visual" id="visual">
+<div class="self"><div class="head"></div><div class="body"></div><div class="label">自分</div></div>
+<div class="scene" id="scene">
+<svg viewBox="0 0 240 170" role="img" aria-label="場面のイラスト">
+<rect x="4" y="4" width="232" height="162" rx="18" fill="#eaf3ee" stroke="#b8cfc4" stroke-width="3"/>
+<circle cx="190" cy="42" r="19" class="sun"/><path d="M10 112 L62 62 L105 112 Z" class="mountain"/><path d="M76 112 L128 70 L175 112 Z" class="mountain2"/><path d="M0 112 Q60 96 120 112 T240 110 V166 H0Z" class="ground"/><path d="M118 106 V72 L158 48 L198 72 V106Z" class="house"/><path d="M112 73 L158 43 L204 73" fill="none" stroke="#7b6a60" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/><rect x="143" y="82" width="30" height="24" rx="2" class="window"/><circle cx="91" cy="121" r="9" fill="#7f9f91"/><path d="M91 130 V151 M91 137 L78 146 M91 137 L104 146" stroke="#657f74" stroke-width="5" stroke-linecap="round"/>
+<g id="sound" opacity="0"><path d="M27 82 H40 L52 70 V94 L40 82 H27Z" fill="#667"/><path d="M58 70 Q72 82 58 94" fill="none" stroke="#667" stroke-width="4" stroke-linecap="round"/><path d="M67 62 Q88 82 67 102" fill="none" stroke="#667" stroke-width="4" stroke-linecap="round"/><path d="M76 54 Q104 82 76 110" fill="none" stroke="#667" stroke-width="4" stroke-linecap="round"/></g>
+</svg><div class="motion" id="motionRing"></div><div class="caption">場面</div>
+</div></div>
+</div>
+<div class="card"><p class="hint">設定した状態をスタート地点として記録してから、実際に変化させてみます。</p><div class="buttons"><button class="secondary" id="back2">戻る</button><button class="primary" id="to4">この状態をスタート地点にする</button><button class="secondary change-home-flow" type="button">🏠 トップへ</button></div></div>
+</section>
+
+<section class="screen" id="screen4">
+<div class="card">
+<h2>4．場面の特徴を少し変えてみましょう</h2>
+<p>スライダーを動かして、頭の中の場面がどう変わるか試してみます。</p>
+<div class="note"><strong>正解はありません。</strong>「少し楽になった」「印象が弱くなった」「あまり変わらない」など、自分の感じ方を観察してみてください。</div>
+</div>
+<div class="card row">
+<div class="controls">
+<h3>動かしてみる</h3>
+<div class="control"><div class="labelline"><span>距離</span><span class="value" id="distanceVal4"></span></div><input class="range" id="distance4" type="range" min="0" max="100" value="50"></div>
+<div class="control"><div class="labelline"><span>大きさ</span><span class="value" id="sizeVal4"></span></div><input class="range" id="size4" type="range" min="0" max="100" value="25"></div>
+<div class="control"><div class="labelline"><span>明るさ</span><span class="value" id="brightnessVal4"></span></div><input class="range" id="brightness4" type="range" min="0" max="100" value="100"></div>
+<div class="control"><div class="labelline"><span>音量</span><span class="value" id="volumeVal4"></span></div><input class="range" id="volume4" type="range" min="0" max="100" value="35"></div>
+<div class="control"><div class="labelline"><span>動き</span><span class="value" id="motionVal4"></span></div><input class="range" id="motion4" type="range" min="0" max="100" value="0"></div>
+<p class="hint">※音量は実際に音を鳴らさず、場面の中の「音が大きい感じ」をイラストで表します。</p>
+</div>
+<div class="visual" id="visual4">
+<div class="self"><div class="head"></div><div class="body"></div><div class="label">自分</div></div>
+<div class="scene" id="scene4"><svg viewBox="0 0 240 170" role="img" aria-label="場面のイラスト"><rect x="4" y="4" width="232" height="162" rx="18" fill="#eaf3ee" stroke="#b8cfc4" stroke-width="3"/><circle cx="190" cy="42" r="19" class="sun"/><path d="M10 112 L62 62 L105 112 Z" class="mountain"/><path d="M76 112 L128 70 L175 112 Z" class="mountain2"/><path d="M0 112 Q60 96 120 112 T240 110 V166 H0Z" class="ground"/><path d="M118 106 V72 L158 48 L198 72 V106Z" class="house"/><path d="M112 73 L158 43 L204 73" fill="none" stroke="#7b6a60" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/><rect x="143" y="82" width="30" height="24" rx="2" class="window"/><circle cx="91" cy="121" r="9" fill="#7f9f91"/><path d="M91 130 V151 M91 137 L78 146 M91 137 L104 146" stroke="#657f74" stroke-width="5" stroke-linecap="round"/><g id="sound4" opacity="0"><path d="M27 82 H40 L52 70 V94 L40 82 H27Z" fill="#667"/><path d="M58 70 Q72 82 58 94" fill="none" stroke="#667" stroke-width="4" stroke-linecap="round"/><path d="M67 62 Q88 82 67 102" fill="none" stroke="#667" stroke-width="4" stroke-linecap="round"/><path d="M76 54 Q104 82 76 110" fill="none" stroke="#667" stroke-width="4" stroke-linecap="round"/></g></svg><div class="motion" id="motionRing4"></div><div class="caption">場面</div></div></div>
+</div>
+<div class="card">
+<h3>どの変化が印象に残りましたか？</h3>
+<p class="hint">いくつ選んでも大丈夫です。特に変化を感じたものを選んでください。</p>
+<div class="choice-row" id="changeChoices"></div>
+<div style="margin-top:18px"><label><strong>変化後の感じ方</strong></label><p class="hint" style="margin:4px 0 8px">最初の状態と比べて、今のつらさ・気になり具合はどのくらいですか？</p><input class="range" id="afterFeel" type="range" min="0" max="10" value="5"><div class="value" id="afterFeelVal">5 / 10</div></div>
+<div class="buttons"><button class="secondary" id="back3">戻る</button><button class="primary" id="to5">結果を確認する</button><button class="secondary change-home-flow" type="button">🏠 トップへ</button></div>
+</div>
+</section>
+
+<section class="screen" id="screen5">
+<div class="card">
+<h2>5．今回の結果を記録します</h2>
+<p>今回の体験を振り返って、次に同じような場面を扱うときの参考にしましょう。</p>
+<div class="summary" id="summary"></div>
+<div style="margin-top:18px"><label><strong>今回気づいたこと（任意）</strong></label><textarea id="memo" class="textarea" style="min-height:110px" placeholder="例：距離を遠くすると、少し気になりにくくなった"></textarea></div>
+<div class="buttons"><button class="secondary" id="back4">戻って調整する</button><button class="primary" id="saveResult">この結果を記録する</button><button class="secondary change-home-flow" type="button">🏠 トップへ</button></div>
+<div id="shareArea" style="display:none;margin-top:20px" class="note">
+<h3 style="margin-top:0">💬 Discordで共有する</h3>
+<p>今回の記録を、Discordにそのまま貼り付けられる文章にしました。内容を確認してからコピーしてください。</p>
+<textarea id="discordText" class="textarea" style="min-height:230px" readonly></textarea>
+<div class="buttons"><button class="primary" id="copyDiscord">📋 Discord用文章をコピー</button><span id="copyStatus" class="hint" style="align-self:center"></span></div>
+</div>
+</div>
+<div class="card"><h3>📚 これまでの記録</h3><div id="history" class="history"></div></div>
+</section>
+</section>
+</div>
+<script>
+const labels={distance:'距離',size:'大きさ',brightness:'明るさ',volume:'音量',motion:'動き'};
+const dirs={front:[0,-1],frontRight:[0.707,-0.707],right:[1,0],backRight:[0.707,0.707],back:[0,1],backLeft:[-0.707,0.707],left:[-1,0],frontLeft:[-0.707,-0.707]};
+const dirNames={front:'前',frontRight:'右斜め前',right:'右',backRight:'右斜め後ろ',back:'後ろ',backLeft:'左斜め後ろ',left:'左',frontLeft:'左斜め前'};
+let currentDir='front', startValues={distance:50,size:25,brightness:100,volume:35,motion:0}, currentValues={...startValues}, selectedChanges=[];
+const screens=[...document.querySelectorAll('.screen')], steps=[...document.querySelectorAll('.step')];
+const homeScreen=document.getElementById('homeScreen'), checkScreen=document.getElementById('checkScreen'), recordsScreen=document.getElementById('recordsScreen'), changeAppScreen=document.getElementById('changeAppScreen');
+function showOnly(el){screens.forEach(s=>s.classList.remove('active'));el.classList.add('active');steps.forEach(s=>s.classList.remove('active','done'));document.getElementById('globalHome').style.display=(el===homeScreen||el===checkScreen||el===changeAppScreen||el===recordsScreen)?'none':'block';window.scrollTo({top:0,behavior:'smooth'});}
+function openChange(){showOnly(changeAppScreen);show(0);}
+function openHome(){showOnly(homeScreen);}
+function openCheck(){showOnly(checkScreen);initCheckVisual();}
+function openRecords(){showOnly(recordsScreen);renderAllRecords();}
+document.getElementById('openChange').onclick=openChange;document.getElementById('openCheck').onclick=openCheck;document.getElementById('openRecords').onclick=openRecords;document.getElementById('backHomeFromCheck').onclick=openHome;document.getElementById('backHomeFromRecords').onclick=openHome;document.getElementById('globalHome').onclick=openHome;document.querySelectorAll('.change-home-flow').forEach(b=>b.onclick=openHome);
+
+function show(n){const changeScreens=[...changeAppScreen.querySelectorAll('.screen')];changeScreens.forEach((s,i)=>s.classList.toggle('active',i===n));steps.forEach((s,i)=>{s.classList.toggle('active',i===n);s.classList.toggle('done',i<n)});window.scrollTo({top:0,behavior:'smooth'});requestAnimationFrame(()=>{if(n===2) updateVisual('scene','visual','motionRing','sound',{distance:val('distance'),size:val('size'),brightness:val('brightness'),volume:val('volume'),motion:val('motion')});if(n===3) syncChange();});}
+function val(id){return +document.getElementById(id).value}
+function setDir(d){currentDir=d;document.querySelectorAll('.dir').forEach(b=>b.classList.toggle('active',b.dataset.dir===d));updateVisual('scene','visual','motionRing','sound',startValues);}
+function updateVisual(sceneId,visualId,motionId,soundId,vals){
+ const scene=document.getElementById(sceneId), visualEl=document.getElementById(visualId); if(!scene||!visualEl)return;
+ const [dx,dy]=dirs[currentDir], vw=visualEl.clientWidth,vh=visualEl.clientHeight;
+ const minW=4,minH=3,baseW=120,baseH=85,maxW=Math.max(minW,vw-16),maxH=maxW*(baseH/baseW),fitH=Math.min(maxH,Math.max(minH,vh-16)),fitW=fitH*(baseW/baseH),ratio=vals.size/100,sceneW=minW+(fitW-minW)*ratio,sceneH=minH+(fitH-minH)*ratio;
+ scene.style.width=sceneW+'px';scene.style.height=sceneH+'px';
+ const halfW=sceneW/2,halfH=sceneH/2,ax=Math.abs(dx),ay=Math.abs(dy),gap=6,minDistance=ax*(26+halfW)+ay*(39+halfH)+gap;let maxDistance=Infinity;if(ax>0)maxDistance=Math.min(maxDistance,(vw/2-halfW-4)/ax);if(ay>0)maxDistance=Math.min(maxDistance,(vh/2-halfH-4)/ay);maxDistance=Math.max(0,maxDistance);const actualMin=Math.min(minDistance,maxDistance),travel=actualMin+(maxDistance-actualMin)*(vals.distance/100);let cx=vw/2+dx*travel,cy=vh/2+dy*travel;cx=Math.max(halfW+4,Math.min(vw-halfW-4,cx));cy=Math.max(halfH+4,Math.min(vh-halfH-4,cy));scene.style.left=cx+'px';scene.style.top=cy+'px';
+ const b=vals.brightness,svg=scene.querySelector('svg');svg.style.filter=`grayscale(${1-b/100}) brightness(${0.65+b/100*0.35})`;const sound=document.getElementById(soundId);sound.style.opacity=Math.min(1,vals.volume/70);sound.style.transform=`scale(${0.65+vals.volume/100*0.8})`;sound.style.transformOrigin='center';document.getElementById(motionId).classList.toggle('spin',vals.motion>45);
+}
+function labelValue(k,v){return k==='distance'?(v<35?'近い':v>65?'遠い':'中くらい'):k==='size'?(v<35?'小さい':v>65?'大きい':'中くらい'):k==='brightness'?(v<35?'暗い':v>65?'明るい':'中間'):k==='volume'?(v<35?'小さい':v>65?'大きい':'中くらい'):(v<35?'止まっている':v>65?'よく動く':'少し動く')}
+function syncInitial(){const ids=['distance','size','brightness','volume','motion'];ids.forEach(k=>{startValues[k]=val(k)});currentValues={...startValues};updateVisual('scene','visual','motionRing','sound',startValues);}
+function syncChange(){['distance','size','brightness','volume','motion'].forEach(k=>currentValues[k]=val(k+'4'));updateVisual('scene4','visual4','motionRing4','sound4',currentValues);['distance','size','brightness','volume','motion'].forEach(k=>document.getElementById(k+'Val4').textContent=labelValue(k,currentValues[k]));}
+function setChangeSliders(){Object.entries(startValues).forEach(([k,v])=>document.getElementById(k+'4').value=v);syncChange();}
+function buildSummary(){const initial=Object.entries(startValues).map(([k,v])=>`${labels[k]}：${labelValue(k,v)}`).join(' / ');const after=Object.entries(currentValues).map(([k,v])=>`${labels[k]}：${labelValue(k,v)}`).join(' / ');document.getElementById('summary').innerHTML=`<div><strong>悩み</strong><br>${escapeHtml(document.getElementById('concern').value)}</div><div><strong>最初の感じ方</strong><br>つらさ・気になり具合：${document.getElementById('beforeFeel').value} / 10</div><div><strong>最初の場面</strong><br>位置：${dirNames[currentDir]}<br>${initial}</div><div><strong>変化後</strong><br>${after}<br>つらさ・気になり具合：${val('afterFeel')} / 10</div><div><strong>変化を感じたもの</strong><br>${selectedChanges.length?selectedChanges.map(k=>labels[k]).join('・'):'まだ選択なし'}</div>`}
+function escapeHtml(s){return s.replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));}
+// Screen 1
+const concern=document.getElementById('concern');concern.addEventListener('input',()=>document.getElementById('concernCount').textContent=concern.value.length);document.querySelectorAll('.example').forEach(b=>b.onclick=()=>{concern.value=b.dataset.example;concern.dispatchEvent(new Event('input'))});
+document.getElementById('to2').onclick=()=>{if(!concern.value.trim()){alert('まず、気になっていることを短く書いてみましょう。');return}show(1)};document.getElementById('back1').onclick=()=>show(0);document.getElementById('to3').onclick=()=>show(2);document.getElementById('back2').onclick=()=>show(1);
+// Initial screen
+['distance','size','brightness','volume','motion'].forEach(k=>document.getElementById(k).addEventListener('input',()=>{updateVisual('scene','visual','motionRing','sound',{distance:val('distance'),size:val('size'),brightness:val('brightness'),volume:val('volume'),motion:val('motion')});document.getElementById(k+'Val').textContent=labelValue(k,val(k))}));document.querySelectorAll('.dir').forEach(b=>b.onclick=()=>{currentDir=b.dataset.dir;document.querySelectorAll('.dir').forEach(x=>x.classList.toggle('active',x.dataset.dir===currentDir));updateVisual('scene','visual','motionRing','sound',{distance:val('distance'),size:val('size'),brightness:val('brightness'),volume:val('volume'),motion:val('motion')})});
+document.getElementById('to4').onclick=()=>{startValues={distance:val('distance'),size:val('size'),brightness:val('brightness'),volume:val('volume'),motion:val('motion')};currentValues={...startValues};setChangeSliders();document.getElementById('beforeFeel').value=5;show(3)};
+// Change screen
+const changeChoices=document.getElementById('changeChoices');Object.entries(labels).forEach(([k,v])=>{const b=document.createElement('button');b.className='choice';b.textContent=v;b.dataset.key=k;b.onclick=()=>{if(selectedChanges.includes(k))selectedChanges=selectedChanges.filter(x=>x!==k);else selectedChanges.push(k);b.classList.toggle('selected',selectedChanges.includes(k))};changeChoices.appendChild(b)});
+['distance','size','brightness','volume','motion'].forEach(k=>document.getElementById(k+'4').addEventListener('input',syncChange));document.getElementById('afterFeel').addEventListener('input',()=>document.getElementById('afterFeelVal').textContent=val('afterFeel')+' / 10');document.getElementById('back3').onclick=()=>{show(2)};document.getElementById('to5').onclick=()=>{buildSummary();show(4)};document.getElementById('back4').onclick=()=>show(3);
+// Before feeling control is inserted into initial screen after load for a simple baseline.
+const initialCard=document.querySelector('#screen3 .card.row');const feel=document.createElement('div');feel.style.marginTop='18px';feel.innerHTML='<label><strong>今のつらさ・気になり具合</strong></label><p class="hint" style="margin:4px 0 8px">今の状態を0〜10で表すと、どのくらいですか？</p><input class="range" id="beforeFeel" type="range" min="0" max="10" value="5"><div class="value" id="beforeFeelVal">5 / 10</div>';initialCard.querySelector('.controls').appendChild(feel);document.getElementById('beforeFeel').addEventListener('input',()=>document.getElementById('beforeFeelVal').textContent=val('beforeFeel')+' / 10');
+// History
+function renderHistory(){const h=document.getElementById('history'),data=JSON.parse(localStorage.getItem('kokoroSubmodalityChangeRecordsV1')||'[]');if(!data.length){h.innerHTML='<div class="empty">まだ記録はありません。</div>';return}h.innerHTML=data.slice().reverse().slice(0,8).map(r=>`<div class="history-item"><strong>${new Date(r.date).toLocaleString('ja-JP')}</strong><br>${escapeHtml(r.concern)}<br>位置：${dirNames[r.direction]}｜変化：${r.selected.map(k=>labels[k]).join('・')||'なし'}｜${r.beforeFeel} → ${r.afterFeel} / 10</div>`).join('')}
+function makeDiscordText(){const initial=Object.entries(startValues).map(([k,v])=>`${labels[k]}：${labelValue(k,v)}`).join(' / ');const after=Object.entries(currentValues).map(([k,v])=>`${labels[k]}：${labelValue(k,v)}`).join(' / ');const memo=document.getElementById('memo').value.trim();return `🌱 サブモダリティーチェンジ記録
+
+📝 出来事
+${concern.value.trim()}
+
+🌡 最初の気になり具合
+${val('beforeFeel')} / 10
+
+🔎 最初のイメージ
+位置：${dirNames[currentDir]}
+${initial}
+
+✨ 変えてみた後
+${after}
+
+🌿 特に変化を感じたもの
+${selectedChanges.length?selectedChanges.map(k=>labels[k]).join('・'):'特になし'}
+
+🌡 変化後の気になり具合
+${val('afterFeel')} / 10${memo?`\n\n💭 やってみて感じたこと\n${memo}`:''}`}
+function showShareArea(){document.getElementById('discordText').value=makeDiscordText();document.getElementById('shareArea').style.display='block';document.getElementById('copyStatus').textContent=''}
+document.getElementById('saveResult').onclick=()=>{const data=JSON.parse(localStorage.getItem('kokoroSubmodalityChangeRecordsV1')||'[]');data.push({date:new Date().toISOString(),concern:concern.value,direction:currentDir,initial:{...startValues},after:{...currentValues},selected:[...selectedChanges],beforeFeel:val('beforeFeel'),afterFeel:val('afterFeel'),memo:document.getElementById('memo').value});localStorage.setItem('kokoroSubmodalityChangeRecordsV1',JSON.stringify(data));renderHistory();showShareArea();document.getElementById('saveResult').textContent='記録済み';document.getElementById('saveResult').disabled=true;};
+document.getElementById('copyDiscord').onclick=async()=>{const text=document.getElementById('discordText').value;try{await navigator.clipboard.writeText(text);document.getElementById('copyStatus').textContent='コピーしました。Discordに貼り付けてください。'}catch(e){const ta=document.getElementById('discordText');ta.removeAttribute('readonly');ta.select();document.execCommand('copy');ta.setAttribute('readonly','');document.getElementById('copyStatus').textContent='コピーしました。Discordに貼り付けてください。'}};
+
+// Standalone check
+const checkVals={distance:50,size:25,brightness:100,volume:35,motion:0};let checkDir='front',checkSelected=[];
+function initCheckVisual(){document.querySelectorAll('#checkDirections .dir').forEach(b=>{b.onclick=()=>{checkDir=b.dataset.dir;document.querySelectorAll('#checkDirections .dir').forEach(x=>x.classList.toggle('active',x.dataset.dir===checkDir));updateCheckVisual();};b.classList.toggle('active',b.dataset.dir===checkDir)});if(!document.getElementById('checkControls').children.length){Object.entries(labels).forEach(([k,v])=>{const wrap=document.createElement('div');wrap.className='control';wrap.innerHTML=`<div class="labelline"><span>${v}</span><span class="value" id="checkVal_${k}"></span></div><input class="range" id="check_${k}" type="range" min="0" max="100" value="${checkVals[k]}">`;document.getElementById('checkControls').appendChild(wrap);document.getElementById('check_'+k).oninput=()=>{checkVals[k]=+document.getElementById('check_'+k).value;document.getElementById('checkVal_'+k).textContent=labelValue(k,checkVals[k]);updateCheckVisual()}})};Object.keys(labels).forEach(k=>document.getElementById('checkVal_'+k).textContent=labelValue(k,checkVals[k]));document.getElementById('checkChoices').innerHTML='';checkSelected=[];Object.entries(labels).forEach(([k,v])=>{const b=document.createElement('button');b.className='choice';b.textContent=v;b.onclick=()=>{if(checkSelected.includes(k))checkSelected=checkSelected.filter(x=>x!==k);else if(checkSelected.length<3)checkSelected.push(k);b.classList.toggle('selected',checkSelected.includes(k));};document.getElementById('checkChoices').appendChild(b)});updateCheckVisual();}
+function updateCheckVisual(){const vals=checkVals;const saved=currentDir;currentDir=checkDir;updateVisual('checkScene','checkVisual','checkMotion','checkSound',vals);currentDir=saved;}
+document.getElementById('saveCheck').onclick=()=>{const data=JSON.parse(localStorage.getItem('kokoroSubmodalityCheckRecordsV1')||'[]');data.push({date:new Date().toISOString(),direction:checkDir,values:{...checkVals},selected:[...checkSelected]});localStorage.setItem('kokoroSubmodalityCheckRecordsV1',JSON.stringify(data));alert('チェック結果を記録しました。');openRecords();};
+function loadRecordList(key){
+  try{
+    const data=JSON.parse(localStorage.getItem(key)||'[]');
+    return Array.isArray(data)?data:[];
+  }catch(e){return [];}
+}
+function deleteRecordAt(key,index){
+  const data=loadRecordList(key);
+  if(!Number.isInteger(index) || index<0 || index>=data.length){
+    alert('この記録を見つけられませんでした。');
+    return false;
+  }
+  if(!window.confirm('この記録を削除しますか？')) return false;
+  data.splice(index,1);
+  localStorage.setItem(key,JSON.stringify(data));
+  renderAllRecords();
+  renderHistory();
+  return false;
+}
+function deleteCheckRecord(index){
+  return deleteRecordAt('kokoroSubmodalityCheckRecordsV1',Number(index));
+}
+function deleteChangeRecord(index){
+  return deleteRecordAt('kokoroSubmodalityChangeRecordsV1',Number(index));
+}
+
+function renderAllRecords(){
+  const checks=loadRecordList('kokoroSubmodalityCheckRecordsV1');
+  const changes=loadRecordList('kokoroSubmodalityChangeRecordsV1');
+  const ch=document.getElementById('checkHistory');
+  const rh=document.getElementById('changeHistory');
+
+  ch.innerHTML=checks.length ? checks.slice().reverse().map((r,i)=>{
+    const idx=checks.length-1-i;
+    const selected=Array.isArray(r.selected)?r.selected:[];
+    return `<div class="record-card">
+      <div class="record-meta">${new Date(r.date).toLocaleString('ja-JP')}</div>
+      位置：${dirNames[r.direction]||'未設定'}<br>
+      変化を感じたもの：${selected.map(k=>labels[k]||k).join('・')||'なし'}
+      <div class="record-actions">
+        <button type="button" class="delete-record" onclick="return deleteCheckRecord(${idx});">この記録を削除</button>
+      </div>
+    </div>`;
+  }).join('') : '<div class="empty">まだチェックの記録はありません。</div>';
+
+  rh.innerHTML=changes.length ? changes.slice().reverse().map((r,i)=>{
+    const idx=changes.length-1-i;
+    const selected=Array.isArray(r.selected)?r.selected:[];
+    return `<div class="record-card">
+      <div class="record-meta">${new Date(r.date).toLocaleString('ja-JP')}</div>
+      <strong>${escapeHtml(r.concern||'')}</strong><br>
+      位置：${dirNames[r.direction]||'未設定'}｜${r.beforeFeel ?? '-'} → ${r.afterFeel ?? '-'} / 10<br>
+      変化を感じたもの：${selected.map(k=>labels[k]||k).join('・')||'なし'}
+      ${r.memo?`<br>気づき：${escapeHtml(r.memo)}`:''}
+      <div class="record-actions">
+        <button type="button" class="delete-record" onclick="return deleteChangeRecord(${idx});">この記録を削除</button>
+      </div>
+    </div>`;
+  }).join('') : '<div class="empty">まだチェンジの記録はありません。</div>';
+
+  const counts={distance:0,size:0,brightness:0,volume:0,motion:0};
+  checks.forEach(r=>(Array.isArray(r.selected)?r.selected:[]).forEach(k=>{if(k in counts)counts[k]++;}));
+  changes.forEach(r=>(Array.isArray(r.selected)?r.selected:[]).forEach(k=>{if(k in counts)counts[k]++;}));
+  const pref=Object.entries(counts).filter(([,n])=>n).sort((a,b)=>b[1]-a[1]);
+  document.getElementById('preferenceHistory').innerHTML=pref.length
+    ? pref.map(([k,n])=>`<div class="record-card"><strong>${labels[k]}</strong>：${n}回「変化を感じた」と記録されています</div>`).join('')
+    : '<div class="empty">まだ傾向を表示できる記録がありません。</div>';
+}
+
+// initial state
+setDir('front');openHome();['distance','size','brightness','volume','motion'].forEach(k=>document.getElementById(k+'Val').textContent=labelValue(k,val(k)));renderHistory();
+</script>
+</body>
+</html>
